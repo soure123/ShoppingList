@@ -1,0 +1,47 @@
+<section id="shoppingList">
+    <header id="header">
+        <h1> Einkaufsliste </h1>
+
+        <form ng-submit="addItem()">
+            <input placeholder="Was soll eingekauft werden?" ng-model="newItem" ng-disabled="saving"
+                   autofocus>
+        </form>
+    </header>
+    <section id="main" ng-show="items.length" ng-cloak>
+        <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
+        <label for="toggle-all">Alle</label>
+        <ul id="shopping-list">
+            <li ng-repeat="item in items">
+                <div class="view" ng-hide="item.editing">
+                    <input class="toggle" type="checkbox" ng-model="item.bought" ng-change="toggleBought(item)">
+                    <label ng-dblclick="startEditing(item)">{{item.article.name}}</label>
+                    <button class="destroy" ng-click="removeItem(item)"></button>
+                </div>
+                <form ng-submit="saveEdits(item, 'submit')" ng-show="item.editing">
+                    <input class="edit" ng-trim="false" ng-model="item.article.name" todo-escape="revertEdits(item)"
+                           ng-blur="saveEdits(item, 'blur')" item-focus="item == editedItem">
+                </form>
+            </li>
+        </ul>
+    </section>
+    <footer id="footer" ng-show="items.length" ng-cloak>
+        <span id="item-count"><strong>{{remainingCount}}</strong>
+            <ng-pluralize count="remainingCount"
+                          when="{ one:'Eintrag übrig', other:'Einträge übrig' }"></ng-pluralize>
+        </span>
+        <ul id="filters">
+            <li>
+                <a ng-class="{selected: status == ''} " href="#/">All</a>
+            </li>
+            <li>
+                <a ng-class="{selected: status == 'toBuy'}" href="#/verbleibend">Verbleibend</a>
+            </li>
+            <li>
+                <a ng-class="{selected: status == 'bought'}" href="#/gekauft">Gekauft</a>
+            </li>
+        </ul>
+    </footer>
+</section>
+<footer id="info">
+    <p>Doppelklicken um einen Eintrag anzupassen</p>
+</footer>

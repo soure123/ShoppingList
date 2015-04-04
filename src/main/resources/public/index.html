@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="shopping">
+    <head lang="de">
+        <meta charset="UTF-8">
+        <title>Einkaufsliste</title>
+        <style>[ng-cloak] {
+            display: none;
+        }</style>
+        <link rel="stylesheet" href="style/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style/css/shopping.css">
+        <script type="text/javascript" src="lib/angular.min.js"></script>
+        <script type="text/javascript" src="lib/angular-route.min.js"></script>
+        <script type="text/javascript" src="lib/angular-touch.min.js"></script>
+        <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.12.1.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script type="text/javascript" src="authentication/HttpInterceptor.js"></script>
+        <script type="text/javascript" src="authentication/authService.js"></script>
+        <script type="text/javascript" src="filters/FindByName.js"></script>
+        <script type="text/javascript" src="navigation/navigation.js"></script>
+        <script type="text/javascript" src="authentication/login/login.js"></script>
+        <script type="text/javascript" src="authentication/logout/logout.js"></script>
+        <script type="text/javascript" src="articles/articleStore.js"></script>
+        <script type="text/javascript" src="shoppingList/itemStore.js"></script>
+        <script type="text/javascript" src="shoppingList/shoppingList.js"></script>
+    </head>
+    <body ng-controller="navigation">
+        <navbar class="navbar-default navbar-fixed-top" role="navigation" ng-include
+                src="'navigation/navigation.html'"></navbar>
+        <div class="content col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" ng-view></div>
+    </body>
+</html>

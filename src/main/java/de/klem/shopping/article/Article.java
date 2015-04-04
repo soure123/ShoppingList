@@ -1,4 +1,4 @@
-package de.klem.shopping;
+package de.klem.shopping.article;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,11 +14,11 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @Entity
-public class Article extends ResourceSupport {
+public class Article {
 
     @Id
     @GeneratedValue
-    private Long articleId;
+    private Long id;
 
     private String name;
 

@@ -1,0 +1,29 @@
+<div class="navbar-inner col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+    <div class="navbar-header">
+        <button type="button" ng-show="modules.length > 0" class="navbar-toggle btn navbar-btn"
+                ng-init="navCollapsed = true"
+                ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div>
+            <a class="navbar-brand" href="#/" title="home">Einkaufsliste</a>
+        </div>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+        <li ng-show="authenticated"><a href="#/logout">{{user}} | Logout</a></li>
+        <li ng-show="!authenticated && !isActive('/login')"><a href="#/login">Login</a></li>
+    </ul>
+    <div collapse="navCollapsed" class="navbar-collapse">
+        <ul class="nav navbar-nav">
+            <li ng-class="{ active: isActive('/Abrechnung')}">
+                <a href="#/Abrechnung">Abrechnung</a>
+            </li>
+            <li ng-class="{ active: isActive('/Artikel')}">
+                <a href="#/Artikel">Artikelliste</a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,9 +1,10 @@
 package de.klem.shopping.list.item;
 
-import de.klem.shopping.Article;
+import de.klem.shopping.article.Article;
 //import de.klem.shopping.list.ShoppingList;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
@@ -14,13 +15,13 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-public class ShoppingItem extends ResourceSupport{
+public class ShoppingItem {
     @Id
     @GeneratedValue
-    private Long itemId;
+    private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "articleId", unique = true, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "articleId", nullable = false)
     private Article article;
 
     private Integer number;
@@ -28,7 +29,7 @@ public class ShoppingItem extends ResourceSupport{
     private boolean bought;
 
     public ShoppingItem(){
-       // this.article = null;
+        this.article = null;
         this.number = 0;
         this.bought = false;
     }
