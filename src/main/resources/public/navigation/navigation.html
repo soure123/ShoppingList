@@ -9,16 +9,16 @@
             <span class="icon-bar"></span>
         </button>
         <ul class="nav navbar-nav pull-right visible-xs">
-            <li ng-show="authenticated"><a href="#/logout">{{user}} | Logout</a></li>
-            <li ng-show="!authenticated && !isActive('/login')"><a href="#/login">Login</a></li>
+            <li ng-show="authenticated"><a href="#/logout">{{user}} | Logout <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+            <li ng-show="!authenticated && !isActive('/login')"><a href="#/login">Login <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a></li>
         </ul>
         <div>
-            <a class="navbar-brand" href="#/" title="home">Einkaufsliste</a>
+            <a class="navbar-brand brand" href="#/" title="home"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> Einkaufsliste </span></a>
         </div>
     </div>
     <ul class="nav navbar-nav navbar-right hidden-xs">
-        <li ng-show="authenticated"><a href="#/logout">{{user}} | Logout</a></li>
-        <li ng-show="!authenticated && !isActive('/login')"><a href="#/login">Login</a></li>
+        <li ng-show="authenticated"><a href="#/logout">{{user}} | Logout <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span></a></li>
+        <li ng-show="!authenticated && !isActive('/login')"><a href="#/login">Login <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a></li>
     </ul>
     <div collapse="navCollapsed" class="navbar-collapse">
         <ul class="nav navbar-nav">
