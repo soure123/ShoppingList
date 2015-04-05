@@ -9,8 +9,8 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location',
         };
 
         var redirectToLoginIfNotFreePage = function(newUrl, oldUrl) {
-            if (newUrl.$$route.originalPath != '/login' && newUrl.$$route.originalPath != '/logout') {
-                if(oldUrl && oldUrl.$$route.originalPath != '/login' && oldUrl.$$route.originalPath != '/logout'){
+            if (newUrl.$$route && newUrl.$$route.originalPath != '/login' && newUrl.$$route.originalPath != '/logout') {
+                if(oldUrl && oldUrl.$$route && oldUrl.$$route.originalPath != '/login' && oldUrl.$$route.originalPath != '/logout'){
                     $scope.lastPath = oldUrl.$$route.originalPath;
                 }else if(!oldUrl){
                     $scope.lastPath = '/';
@@ -29,5 +29,28 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location',
                 redirectToLoginIfNotFreePage(newUrl, oldUrl)
             }
         })
+
+        $scope.$on('$routeChangeSuccess', function () {
+            $scope.navCollapsed = true;
+        })
+
+        $scope.showLoginNav = function(){
+            return !$rootScope.authenticated && !$scope.isActive('/login')
+        }
+
+        $scope.showLogoutNav = function(){
+            return $rootScope.authenticated;
+        }
+
+        $scope.hideLoginLogoutNav = function(){
+            return !$rootScope.authenticated && $scope.isActive('/login')
+        }
+
+        $scope.linkTo = function(view){
+            $scope.navCollapsed = true;
+            if(!angular.equals($location.path(), view)){
+                $location.path(view); // path not hash
+            }
+        };
     }
 ]);
