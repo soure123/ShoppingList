@@ -50,10 +50,10 @@
                 </ul>
                 <div class="navbar-right">
                     <p class="navbar-text hidden-xs">{{user}}</p>
-                    <ul ng-hide="hideLoginLogoutNav()" collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
-                        <li ng-show="showLogoutNav()"><a href="#/logout">Logout <span class="glyphicon glyphicon-log-out"
+                    <ul collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
+                        <li ng-show="authenticated"><a href="#/logout">Logout <span class="glyphicon glyphicon-log-out"
                                                                                       aria-hidden="true"></span></a></li>
-                        <li ng-show="showLoginNav()"><a href="#/login">Login <span
+                        <li ng-show="!authenticated"><a href="#/login">Login <span
                                 class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a></li>
                     </ul>
                 </div>

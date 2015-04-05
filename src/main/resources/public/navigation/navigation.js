@@ -22,7 +22,7 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location',
         $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
 
             if($rootScope.authenticated){
-                if(newUrl.$$route.originalPath == '/login'){
+                if(newUrl.$$route && newUrl.$$route.originalPath == '/login'){
                     $location.path( oldUrl.$$route.originalPath == '/logout' ? '/' : oldUrl.$$route.originalPath);
                 }
             }else{
@@ -33,24 +33,5 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location',
         $scope.$on('$routeChangeSuccess', function () {
             $scope.navCollapsed = true;
         })
-
-        $scope.showLoginNav = function(){
-            return !$rootScope.authenticated && !$scope.isActive('/login')
-        }
-
-        $scope.showLogoutNav = function(){
-            return $rootScope.authenticated;
-        }
-
-        $scope.hideLoginLogoutNav = function(){
-            return !$rootScope.authenticated && $scope.isActive('/login')
-        }
-
-        $scope.linkTo = function(view){
-            $scope.navCollapsed = true;
-            if(!angular.equals($location.path(), view)){
-                $location.path(view); // path not hash
-            }
-        };
     }
 ]);
