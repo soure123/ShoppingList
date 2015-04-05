@@ -8,10 +8,23 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location',
             return viewLocation === $location.path();
         };
 
-        $rootScope.$on('$routeChangeStart', function () {
-            if (!$scope.isActive('/login') && !$scope.isActive('/logout') && !$rootScope.authenticated) {
-                $scope.lastPath = $location.path();
+        var redirectToLoginIfNotFreePage = function(newUrl, oldUrl) {
+            if (newUrl.$$route.originalPath != '/login' && newUrl.$$route.originalPath != '/logout') {
+                if(oldUrl){
+                    $scope.lastPath = oldUrl.$$route.originalPath;
+                }
                 $location.path('/login');
+            }
+        }
+
+        $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
+
+            if($rootScope.authenticated){
+                if(newUrl.$$route.originalPath == '/login'){
+                    $location.path( oldUrl.$$route.originalPath);
+                }
+            }else{
+                redirectToLoginIfNotFreePage(newUrl, oldUrl)
             }
         })
     }

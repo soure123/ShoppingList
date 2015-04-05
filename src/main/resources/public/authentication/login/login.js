@@ -15,6 +15,12 @@ shopping.controller('login',['$rootScope', '$scope', '$location', 'authService',
             })
         };
 
+        authService.isAuthenticated(function (username) {
+            $rootScope.user = username;
+            if($rootScope.authenticated){
+                $location.path($scope.$parent.lastPath);
+            }
+        })
     }
 ]);
 

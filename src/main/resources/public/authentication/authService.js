@@ -20,6 +20,22 @@ shopping.factory('authService',['$http', '$rootScope', function($http, $rootScop
 
         },
 
+        isAuthenticated : function(callback){
+            $http.get(USER_ENDPOINT)
+                .success(function (data) {
+                    if(data.name){
+                        $rootScope.authenticated = true;
+                        callback && callback(data.name);
+                    }else{
+                        $rootScope.authenticated = false;
+                        callback && callback();
+                    }
+                }).error(function () {
+                    $rootScope.authenticated = false;
+                    callback && callback();
+                });
+        },
+
         getAuthenticationHeader : function(credentials){
             return credentials ? {
                 authorization: "Basic "
