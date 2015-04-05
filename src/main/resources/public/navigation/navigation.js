@@ -12,6 +12,8 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location',
             if (newUrl.$$route.originalPath != '/login' && newUrl.$$route.originalPath != '/logout') {
                 if(oldUrl){
                     $scope.lastPath = oldUrl.$$route.originalPath;
+                }else{
+                    $scope.lastPath = '/';
                 }
                 $location.path('/login');
             }
@@ -21,7 +23,7 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location',
 
             if($rootScope.authenticated){
                 if(newUrl.$$route.originalPath == '/login'){
-                    $location.path( oldUrl.$$route.originalPath);
+                    $location.path( oldUrl.$$route.originalPath == '/logout' ? '/' : oldUrl.$$route.originalPath);
                 }
             }else{
                 redirectToLoginIfNotFreePage(newUrl, oldUrl)
