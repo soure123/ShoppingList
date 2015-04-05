@@ -60,11 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .logout().logoutSuccessUrl("/#logout").deleteCookies("JSESSIONID", "XSRF-TOKEN")
                 .and()
                 .csrf()
-                .disable();
-                /*
                 .csrfTokenRepository(csrfTokenRepository())
                 .and()
-                .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);*/
+                .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
     }
 
     @Override
