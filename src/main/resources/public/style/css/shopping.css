@@ -15,10 +15,19 @@
     text-align: center;
 }
 
-#shoppingList {
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+#main{
+    text-align : left;
 }
 
-#shopping-list {
-    list-style-type: none;
+.invisible-button{
+    background:transparent;
+    border:none;
+}
+
+#filters li{
+    display:inline;
+}
+
+.done {
+    text-decoration: line-through;
 }

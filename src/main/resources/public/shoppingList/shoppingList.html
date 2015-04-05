@@ -14,9 +14,16 @@
             <ul id="shopping-list">
                 <li ng-repeat="item in items">
                     <div class="view" ng-hide="item.editing">
-                        <input class="toggle pull-left" type="checkbox" ng-model="item.bought" ng-change="toggleBought(item)">
-                        <label class="pull-left" ng-dblclick="startEditing(item)">{{item.article.name}}</label>
-                        <button class="destroy pull-right" ng-click="removeItem(item)"></button>
+                        <input class="toggle" type="checkbox" ng-model="item.bought" ng-change="toggleBought(item)">
+                        <label ng-class="{ done: item.bought}"ng-click="toggleBought(item)">{{item.article.name}}</label>
+                        <div class="pull-right">
+                            <button class="invisible-button" ng-click="startEditing(item)">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button>
+                            <button class="invisible-button" ng-click="removeItem(item)">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </div>
                     </div>
                     <form ng-submit="saveEdits(item, 'submit')" ng-show="item.editing">
                         <input class="edit" ng-trim="false" ng-model="item.article.name" todo-escape="revertEdits(item)"
@@ -44,6 +51,6 @@
         </footer>
     </section>
     <footer id="info">
-        <p>Doppelklicken um einen Eintrag anzupassen</p>
+        <p></p>
     </footer>
 </div>
