@@ -2,19 +2,22 @@
 <html ng-app="shopping">
 <head lang="de">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>Einkaufsliste</title>
-    <style>[ng-cloak] {
-        display: none;
-    }</style>
-    <link rel="SHORTCUT ICON" href="img/fav.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui, user-scalable=no"/>
     <link rel="stylesheet" href="style/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/css/shopping.css">
+    <link rel="SHORTCUT ICON" href="img/fav.ico" type="image/x-icon">
+
+    <!--Android-->
+    <meta name="mobile-web-app-capable" content="yes">
     <link rel="manifest" href="manifest.json">
+
+    <!--Libraries-->
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="lib/angular-route.min.js"></script>
     <script type="text/javascript" src="lib/angular-touch.min.js"></script>
     <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.12.1.min.js"></script>
+
+    <!--The App-->
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="authentication/HttpInterceptor.js"></script>
     <script type="text/javascript" src="authentication/authService.js"></script>
@@ -27,6 +30,8 @@
     <script type="text/javascript" src="shoppingList/shoppingList.js"></script>
     <script type="text/javascript" src="articles/articles.js"></script>
     <script type="text/javascript" src="accounting/accounting.js"></script>
+
+    <title>Einkaufsliste</title>
 </head>
 <body ng-controller="navigation as nav">
 <navbar class="navbar-default navbar-fixed-top">
