@@ -10,14 +10,18 @@ shopping.config(['$routeProvider', function($routeProvider){
         .when('/:status', routeConfig);
 }])
 
-shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams',
-    function($scope, itemStore, $routeParams){
+shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$filter',
+    function($scope, itemStore, $routeParams, $filter){
         'use strict';
         itemStore.fetch();
 
         $scope.originalItem = null;
 
         var items = $scope.items = itemStore.items;
+
+        $scope.$watch('items', function () {
+            $scope.allChecked = !$filter('filter')(items, { bought: false }).length;
+        }, true);
 
         $scope.$on('$routeChangeSuccess', function () {
             var status = $scope.status = $routeParams.status || '';
@@ -100,5 +104,13 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams',
                     item.bought = !item.bought;
                 });
         };
+
+        $scope.markAll = function(bought){
+            items.forEach(function (item) {
+                if (item.bought !== bought) {
+                    $scope.toggleBought(item, bought);
+                }
+            });
+        }
     }
 ]);
