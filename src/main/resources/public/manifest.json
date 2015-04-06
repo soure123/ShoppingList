@@ -1,13 +1,5 @@
 {
   "name": "Einkaufsliste",
-  "icons": [
-    {
-      "src": "img/fav.ico",
-      "sizes": "196x196",
-      "type": "image/ico",
-      "density": "1.0"
-    }
-  ],
   "start_url": "index.html",
   "display": "standalone",
   "orientation": "portrait"
