@@ -1,6 +1,7 @@
 ### ShoppingList
 
-Is what the name says. A simple shopping list.
+Is what the name says. A simple shopping list. 
+The Frontend is an AngularJS-App and the Backend is a Spring Boot Application.
 
 ### Requirements
 
@@ -11,7 +12,7 @@ Is what the name says. A simple shopping list.
 ### Setup
 
 * Clone the project from Github
-* Create a DB
+* Create a DB-Schema and a User with Read and Write Privileges
 * Create the Spring Security tables for users and authorities
 
 ##Users
