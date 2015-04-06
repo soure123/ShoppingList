@@ -89,7 +89,7 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
 
             item.article.name = item.article.name.trim();
 
-            if (item.article.name === $scope.originalItem.article.name) {
+            if (item.article.name === $scope.originalItem.article.name && item.number === $scope.originalItem.number) {
                 item.editing = false;
                 return;
             }
@@ -97,6 +97,7 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
             itemStore[item.article.name ? 'put' : 'delete'](item)
                 .then(function success() {}, function error() {
                     item.article.name = $scope.originalItem.article.name;
+                    item.number = $scope.originalItem.number;
                 })
                 .finally(function () {
                     item.editing = false;
