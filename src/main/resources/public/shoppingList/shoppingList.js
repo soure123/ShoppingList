@@ -6,8 +6,8 @@ shopping.config(['$routeProvider', function($routeProvider){
         controller: 'shoppingList'
     };
     $routeProvider
-        .when('/', routeConfig)
-        .when('/:status', routeConfig);
+        .when('/einkaufsliste', routeConfig)
+        .when('/einkaufsliste/:status', routeConfig);
 }])
 
 shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$filter',
