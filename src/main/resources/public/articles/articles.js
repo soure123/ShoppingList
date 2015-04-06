@@ -3,13 +3,13 @@ var shopping = angular.module('shopping');
 shopping.config(['$routeProvider', function($routeProvider){
     var routeConfig = {
         templateUrl: '/articles/articles.html',
-        controller: 'article'
+        controller: 'articles'
     };
     $routeProvider
         .when('/artikel', routeConfig);
 }])
 
-shopping.controller('article', ['$scope',
+shopping.controller('articles', ['$scope',
     function($scope) {
     }
 ]);
