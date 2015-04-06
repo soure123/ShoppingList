@@ -1,64 +1,65 @@
 <!DOCTYPE html>
 <html ng-app="shopping">
-    <head lang="de">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>Einkaufsliste</title>
-        <style>[ng-cloak] {
-            display: none;
-        }</style>
-        <link rel="stylesheet" href="style/css/bootstrap.min.css">
-        <link rel="stylesheet" href="style/css/shopping.css">
-        <script type="text/javascript" src="lib/angular.min.js"></script>
-        <script type="text/javascript" src="lib/angular-route.min.js"></script>
-        <script type="text/javascript" src="lib/angular-touch.min.js"></script>
-        <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.12.1.min.js"></script>
-        <script type="text/javascript" src="app.js"></script>
-        <script type="text/javascript" src="authentication/HttpInterceptor.js"></script>
-        <script type="text/javascript" src="authentication/authService.js"></script>
-        <script type="text/javascript" src="filters/FindByName.js"></script>
-        <script type="text/javascript" src="navigation/navigation.js"></script>
-        <script type="text/javascript" src="authentication/login/login.js"></script>
-        <script type="text/javascript" src="authentication/logout/logout.js"></script>
-        <script type="text/javascript" src="articles/articleStore.js"></script>
-        <script type="text/javascript" src="shoppingList/itemStore.js"></script>
-        <script type="text/javascript" src="shoppingList/shoppingList.js"></script>
-    </head>
-    <body ng-controller="navigation as nav">
-        <navbar class="navbar-default navbar-fixed-top">
-            <div class="navbar-inner col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle btn navbar-btn"  ng-click="navCollapsed = !navCollapsed">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <p class="navbar-text pull-right visible-xs">{{user}}</p>
-                    <div>
-                        <a class="navbar-brand" href="#/" title="home"><span class="glyphicon glyphicon-shopping-cart"
-                                                                             aria-hidden="true"> Einkaufsliste </span></a>
-                    </div>
-                </div>
-                <ul collapse="navCollapsed" class="nav navbar-nav navbar-left navbar-collapse">
-                    <li ng-class="{ active: isActive('/Abrechnung')}">
-                        <a href="#/abrechnung">Abrechnung</a>
-                    </li>
-                    <li ng-class="{ active: isActive('/Artikel')}">
-                        <a href="#/artikel">Artikelliste</a>
-                    </li>
-                </ul>
-                <div class="navbar-right">
-                    <p class="navbar-text hidden-xs">{{user}}</p>
-                    <ul collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
-                        <li ng-show="authenticated"><a href="#/logout">Logout <span class="glyphicon glyphicon-log-out"
-                                                                                      aria-hidden="true"></span></a></li>
-                        <li ng-show="!authenticated"><a href="#/login">Login <span
-                                class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a></li>
-                    </ul>
-                </div>
+<head lang="de">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Einkaufsliste</title>
+    <style>[ng-cloak] {
+        display: none;
+    }</style>
+    <link rel="stylesheet" href="style/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style/css/shopping.css">
+    <script type="text/javascript" src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="lib/angular-route.min.js"></script>
+    <script type="text/javascript" src="lib/angular-touch.min.js"></script>
+    <script type="text/javascript" src="lib/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="authentication/HttpInterceptor.js"></script>
+    <script type="text/javascript" src="authentication/authService.js"></script>
+    <script type="text/javascript" src="filters/FindByName.js"></script>
+    <script type="text/javascript" src="navigation/navigation.js"></script>
+    <script type="text/javascript" src="authentication/login/login.js"></script>
+    <script type="text/javascript" src="authentication/logout/logout.js"></script>
+    <script type="text/javascript" src="articles/articleStore.js"></script>
+    <script type="text/javascript" src="shoppingList/itemStore.js"></script>
+    <script type="text/javascript" src="shoppingList/shoppingList.js"></script>
+</head>
+<body ng-controller="navigation as nav">
+<navbar class="navbar-default navbar-fixed-top">
+    <div class="navbar-inner col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle btn navbar-btn" ng-click="navCollapsed = !navCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <p class="navbar-text pull-right visible-xs">{{user}}</p>
+
+            <div>
+                <a class="navbar-brand" href="#/" title="home"><span class="glyphicon glyphicon-shopping-cart"
+                                                                     aria-hidden="true"> Einkaufsliste </span></a>
             </div>
-        </navbar>
-        <div class="content col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" ng-view></div>
-    </body>
+        </div>
+        <ul collapse="navCollapsed" class="nav navbar-nav navbar-left navbar-collapse">
+            <li ng-class="{ active: isActive('/Abrechnung')}">
+                <a href="#/abrechnung">Abrechnung</a>
+            </li>
+            <li ng-class="{ active: isActive('/Artikel')}">
+                <a href="#/artikel">Artikelliste</a>
+            </li>
+        </ul>
+        <div class="navbar-right">
+            <p class="navbar-text hidden-xs">{{user}}</p>
+            <ul collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
+                <li ng-show="authenticated"><a href="#/logout">Logout <span class="glyphicon glyphicon-log-out"
+                                                                            aria-hidden="true"></span></a></li>
+                <li ng-show="!authenticated"><a href="#/login">Login <span
+                        class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</navbar>
+<div class="content col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" ng-view></div>
+</body>
 </html>

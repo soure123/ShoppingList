@@ -1,20 +1,32 @@
 var shopping = angular.module('shopping');
 
 shopping.config(['$routeProvider', function($routeProvider){
-    $routeProvider.when('/', {
+    var routeConfig = {
         templateUrl: '/shoppingList/shoppingList.html',
         controller: 'shoppingList'
-    });
+    };
+    $routeProvider
+        .when('/', routeConfig)
+        .when('/:status', routeConfig);
 }])
 
-shopping.controller('shoppingList', ['$scope', 'itemStore',
-    function($scope, itemStore){
+shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams',
+    function($scope, itemStore, $routeParams){
         'use strict';
         itemStore.fetch();
 
         $scope.originalItem = null;
 
         var items = $scope.items = itemStore.items;
+
+        $scope.$on('$routeChangeSuccess', function () {
+            var status = $scope.status = $routeParams.status || '';
+
+            $scope.statusFilter = (status === 'verbleibend') ?
+            { bought: false } : (status === 'gekauft') ?
+            { bought: true } : null;
+        });
+
         $scope.addItem = function additem(){
             var newItem = {
                 article : {
