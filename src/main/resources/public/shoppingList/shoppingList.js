@@ -14,7 +14,16 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
     function($scope, itemStore, $routeParams, $filter){
         'use strict';
 
+        var initNewItem = function(){
+            return {
+                name : '',
+                count : 1
+            };
+        }
         $scope.originalItem = null;
+        $scope.newItem = initNewItem();
+
+
 
         var items = $scope.items = itemStore.items;
 
@@ -33,9 +42,9 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         $scope.addItem = function additem(){
             var newItem = {
                 article : {
-                    name: $scope.newItem.trim()
+                    name: $scope.newItem.name.trim()
                 },
-                number: 1,
+                number: $scope.newItem.count,
                 bought : false
             }
 
@@ -47,7 +56,7 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
 
             itemStore.insert(newItem)
                 .then(function(){
-                    $scope.newItem = '';
+                    $scope.newItem = initNewItem();
                 })
                 .finally(function(){
                     $scope.saving = false;
@@ -97,6 +106,8 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         $scope.toggleBought = function (item, bought) {
             if (angular.isDefined(bought)) {
                 item.bought = bought;
+            }else{
+                item.bought = !item.bought;
             }
             itemStore.put(item)
                 .then(function success() {}, function error() {
