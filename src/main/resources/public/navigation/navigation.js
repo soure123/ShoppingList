@@ -1,11 +1,18 @@
 var shopping = angular.module('shopping');
 
-shopping.controller('navigation', ['$rootScope', '$scope', '$location',
-    function ($rootScope, $scope, $location) {
+shopping.controller('navigation', ['$rootScope', '$scope', '$location', '$route', '$routeParams',
+    function ($rootScope, $scope, $location, $route, $routeParams) {
         $scope.lastPath = "";
 
         $scope.isActive = function (viewLocation) {
-            return viewLocation === $location.path();
+            viewLocation = viewLocation.split('/');
+            var location = $location.path().split('/');
+            for(var i = 0; i < viewLocation.length; i++){
+                if(viewLocation[i] != location[i]){
+                    return false;
+                }
+            }
+            return true;
         };
 
         var redirectToLoginIfNotFreePage = function(newUrl, oldUrl) {
