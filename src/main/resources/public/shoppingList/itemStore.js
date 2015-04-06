@@ -97,6 +97,7 @@ shopping.factory('itemStore', ['$http', 'articleStore',
                 });
             }
         };
+        store.fetch();
         return store;
     }
 ]);

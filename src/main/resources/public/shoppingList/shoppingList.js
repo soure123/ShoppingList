@@ -13,7 +13,6 @@ shopping.config(['$routeProvider', function($routeProvider){
 shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$filter',
     function($scope, itemStore, $routeParams, $filter){
         'use strict';
-        itemStore.fetch();
 
         $scope.originalItem = null;
 
