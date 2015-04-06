@@ -1,1 +1,9 @@
 <h1> Artikelliste </h1>
+<ul>
+    <li ng-repeat="article in articles">
+        <label>{{article.name}}</label>
+        <button class="invisible-button" ng-click="removeArticle(article)">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </button>
+    </li>
+</ul>

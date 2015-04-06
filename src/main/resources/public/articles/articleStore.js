@@ -29,7 +29,21 @@ shopping.factory('articleStore', ['$http' , '$q', '$filter', function($http, $q,
         },
         findByName: function (name) {
             return $filter('findByName')(store.articles, name);
+        },
+        delete: function (article) {
+            var originalArticles = store.articles.slice(0);
+
+            store.articles.splice(store.articles.indexOf(article), 1);
+
+            return $http.delete(ARTICLE_ENDPOINT + article.id)
+                .then(function success() {
+                    return store.articles;
+                }, function error() {
+                    angular.copy(originalArticles, store.articles);
+                    return originalArticles;
+                });
         }
     }
+    store.fetch();
     return store;
 }])

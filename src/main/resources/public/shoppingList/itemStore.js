@@ -3,7 +3,7 @@ var shopping = angular.module('shopping');
 shopping.factory('itemStore', ['$http', 'articleStore',
     function($http, articleStore) {
         'use strict';
-        var ITEM_ENDPOINT = '/api/shoppingItems';
+        var ITEM_ENDPOINT = '/api/shoppingItems/';
 
         var postItem = function(item, articleLocation){
             var postItem = {};
@@ -22,7 +22,7 @@ shopping.factory('itemStore', ['$http', 'articleStore',
             var copiedItem = {};
             angular.copy(item, copiedItem);
             copiedItem.article = articleLocation;
-            return $http.put('/api/shoppingItems/' + copiedItem.id, copiedItem)
+            return $http.put(ITEM_ENDPOINT + copiedItem.id, copiedItem)
                 .then(function success() {
                     return store.items;
                 }, function error() {
@@ -39,7 +39,7 @@ shopping.factory('itemStore', ['$http', 'articleStore',
 
                 store.items.splice(store.items.indexOf(item), 1);
 
-                return $http.delete('/api/shoppingItems/' + item.id)
+                return $http.delete(ITEM_ENDPOINT + item.id)
                     .then(function success() {
                         return store.items;
                     }, function error() {

@@ -9,7 +9,12 @@ shopping.config(['$routeProvider', function($routeProvider){
         .when('/artikel', routeConfig);
 }])
 
-shopping.controller('articles', ['$scope',
-    function($scope) {
+shopping.controller('articles', ['$scope', 'articleStore',
+    function($scope, articleStore) {
+        var articles = $scope.articles = articleStore.articles;
+
+        $scope.removeArticle = function (article) {
+            articleStore.delete(article);
+        };
     }
 ]);
