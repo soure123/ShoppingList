@@ -21,7 +21,7 @@ Is what the name says. A simple shopping list.
       password varchar_ignorecase(50) not null,
       enabled boolean not null);</pre>
 
-##authorities
+##Authorities
 
   <pre>create table authorities (
       username varchar_ignorecase(50) not null,
