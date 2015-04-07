@@ -40,5 +40,9 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', '$route'
         $scope.$on('$routeChangeSuccess', function () {
             $scope.navCollapsed = true;
         })
+
+        $scope.toggleNavCollapsed = function (){
+            $scope.navCollapsed = ! $scope.navCollapsed;
+        }
     }
 ]);

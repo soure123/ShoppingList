@@ -39,53 +39,7 @@
     <title>Einkaufsliste</title>
 </head>
 <body ng-controller="navigation">
-<navbar class="navbar-default navbar-fixed-top">
-    <div class="navbar-inner col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle btn navbar-btn" ng-click="navCollapsed = !navCollapsed">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <p class="navbar-text pull-right visible-xs">{{user}}</p>
-
-            <div>
-                <a class="navbar-brand" href="#/" title="home">
-                    <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> Einkaufsliste </span>
-                </a>
-            </div>
-        </div>
-        <ul collapse="navCollapsed" class="nav navbar-nav navbar-left navbar-collapse">
-
-            <li ng-class="{ active: isActive('/einkaufsliste')}">
-                <a href="#/einkaufsliste">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"> Home</span>
-                </a>
-            </li>
-            <li ng-class="{ active: isActive('/abrechnung')}">
-                <a href="#/abrechnung">Abrechnung</a>
-            </li>
-            <li ng-class="{ active: isActive('/artikel')}">
-                <a href="#/artikel">Artikelliste</a>
-            </li>
-        </ul>
-        <div class="navbar-right">
-            <p class="navbar-text hidden-xs">{{user}}</p>
-            <ul collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
-                <li ng-show="authenticated">
-                    <a href="#/logout">
-                        <span class="glyphicon glyphicon-log-out" aria-hidden="true"> Logout</span>
-                    </a>
-                </li>
-                <li ng-show="!authenticated">
-                    <a href="#/login">
-                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"> Login</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+<navbar class="navbar-default navbar-fixed-top" ng-include="'navigation/navigation.html'">
 </navbar>
 <div class="content col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" ng-view></div>
 </body>
