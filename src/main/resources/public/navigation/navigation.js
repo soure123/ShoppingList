@@ -1,7 +1,7 @@
 var shopping = angular.module('shopping');
 
-shopping.controller('navigation', ['$rootScope', '$scope', '$location', '$route', '$routeParams',
-    function ($rootScope, $scope, $location, $route, $routeParams) {
+shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authService',
+    function ($rootScope, $scope, $location, authService) {
         $scope.lastPath = "";
 
         $scope.isActive = function (viewLocation) {
@@ -33,7 +33,10 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', '$route'
                     $location.path( oldUrl.$$route.originalPath == '/logout' ? '/' : oldUrl.$$route.originalPath);
                 }
             }else{
-                redirectToLoginIfNotFreePage(newUrl, oldUrl)
+                authService.isAuthenticated(function (username) {
+                    $rootScope.user = username;
+                    redirectToLoginIfNotFreePage(newUrl, oldUrl)
+                })
             }
         })
 
