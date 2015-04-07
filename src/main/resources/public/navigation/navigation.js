@@ -3,6 +3,7 @@ var shopping = angular.module('shopping');
 shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authService',
     function ($rootScope, $scope, $location, authService) {
         $scope.lastPath = "";
+        $scope.navCollapsed = true;
 
         $scope.isActive = function (viewLocation) {
             viewLocation = viewLocation.split('/');
