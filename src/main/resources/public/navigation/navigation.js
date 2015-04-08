@@ -26,7 +26,7 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
 
         var redirectToLoginIfNotFreePage = function(newUrl, oldUrl) {
             if (!urlMatchesPath(newUrl, '/login') && !urlMatchesPath(newUrl, '/logout')) {
-                if(!urlMatchesPath(oldUrl, '/login') && !urlMatchesPath(oldUrl, '/logout')){
+                if(oldUrl && !urlMatchesPath(oldUrl, '/login') && !urlMatchesPath(oldUrl, '/logout')){
                     $scope.lastPath = oldUrl.$$route.originalPath;
                 }else if(!oldUrl){
                     $scope.lastPath = '/';
@@ -38,15 +38,14 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
         var redirectToLoginIfAuthenticationRequired = function(newUrl, oldUrl) {
             authService.isAuthenticated(function (username) {
                 $rootScope.user = username;
-                if (!authenticated) {
+                if (!$rootScope.authenticated) {
                     redirectToLoginIfNotFreePage(newUrl, oldUrl);
                 }
 
             });
         };
 
-        $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
-
+        $scope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
             if($rootScope.authenticated){
                 if(urlMatchesPath(newUrl, '/login')){
                     $location.path( urlMatchesPath(oldUrl, '/logout') ? '/' : oldUrl.$$route.originalPath);
