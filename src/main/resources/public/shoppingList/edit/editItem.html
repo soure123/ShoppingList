@@ -3,14 +3,10 @@
         <h2 class="modal-title">Einkaufslisten Posten editieren</h2>
     </div>
     <div class="modal-body">
-        <div class="form-group">
-            <div class="col-xs-3">
-                <input class="form-control" type="number" ng-model="item.number" min="1" max="99"/>
-            </div>
-            <div class="col-xs-9">
-                <input ng-trim="false" class="form-control" ng-model="item.article.name">
-            </div>
-        </div>
+        <label>Anzahl</label>
+        <input class="form-control" type="number" ng-model="item.number" min="1" max="99"/>
+        <label>Bezeichnung</label>
+        <input ng-trim="false" class="form-control" ng-model="item.article.name">
     </div>
     <div class="modal-footer">
         <button type="submit" class="btn btn-success" ng-click="ok()">OK</button>
