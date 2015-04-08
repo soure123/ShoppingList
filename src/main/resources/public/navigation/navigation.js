@@ -18,10 +18,14 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
 
         $scope.toggleNavCollapsed = function (){
             $scope.navCollapsed = ! $scope.navCollapsed;
+        };
+
+        var urlIsDefined = function(url){
+            return url && url.$$route;
         }
 
         var urlMatchesPath = function(url, path){
-            return url && url.$$route && url.$$route.originalPath == path;
+            return urlIsDefined(url) && url.$$route.originalPath == path;
         };
 
         var isFreeRoute = function (url) {
@@ -30,7 +34,9 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
 
         var redirectToLoginIfNotFreeRotue = function(newUrl) {
             if (!isFreeRoute(newUrl)) {
-                $scope.lastPath = newUrl.$$route.originalPath
+                if(urlIsDefined(newUrl)){
+                    $scope.lastPath = newUrl.$$route.originalPath;
+                }
                 $location.path('/login');
             }
         };
@@ -49,7 +55,7 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
         var stopCalling = $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
             if($rootScope.authenticated){
                 if(urlMatchesPath(newUrl, '/login')){
-                    $location.path( oldUrl && oldUrl.$$route ? oldUrl.$$route.originalPath : '/');
+                    $location.path( urlIsDefined(oldUrl) ? oldUrl.$$route.originalPath : '/');
                 }
             }else{
                 if(!isFreeRoute(newUrl)){
