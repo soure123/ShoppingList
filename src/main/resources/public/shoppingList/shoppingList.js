@@ -10,8 +10,8 @@ shopping.config(['$routeProvider', function($routeProvider){
         .when('/einkaufsliste/:status', routeConfig);
 }])
 
-shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$filter',
-    function($scope, itemStore, $routeParams, $filter){
+shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$filter', '$modal',
+    function($scope, itemStore, $routeParams, $filter, $modal){
         'use strict';
 
         var initNewItem = function(){
@@ -24,8 +24,27 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         $scope.newItem = initNewItem();
 
 
-
         var items = $scope.items = itemStore.items;
+
+        var open = function (size, item) {
+
+            var modalInstance = $modal.open({
+                templateUrl: 'shoppingList/edit/editItem.html',
+                controller: 'editItem',
+                size: size,
+                resolve: {
+                    item: function () {
+                        return item;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (item) {
+                saveEdits(item);
+            }, function () {
+                revertEdits(item);
+            });
+        };
 
         $scope.$watch('items', function () {
             $scope.allChecked = !$filter('filter')(items, { bought: false }).length;
@@ -68,26 +87,17 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         };
 
         $scope.startEditing = function(item){
-            item.editing = true;
+            open('lg', item);
             $scope.originalItem = {};
             angular.copy(item, $scope.originalItem);
         }
-        $scope.saveEdits = function (item, event) {
-            if (event === 'blur' && $scope.saveEvent === 'submit') {
-                $scope.saveEvent = null;
-                item.editing = false;
-                return;
-            }
 
-            $scope.saveEvent = event;
+        var revertEdits = function(item){
+            item.article.name = $scope.originalItem.article.name;
+            item.number = $scope.originalItem.number;
+        }
 
-            if ($scope.reverted) {
-                $scope.reverted = null;
-                item.editing = false;
-                return;
-            }
-
-            item.article.name = item.article.name.trim();
+        var saveEdits = function (item) {
 
             if (item.article.name === $scope.originalItem.article.name && item.number === $scope.originalItem.number) {
                 item.editing = false;
@@ -96,11 +106,7 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
 
             itemStore[item.article.name ? 'put' : 'delete'](item)
                 .then(function success() {}, function error() {
-                    item.article.name = $scope.originalItem.article.name;
-                    item.number = $scope.originalItem.number;
-                })
-                .finally(function () {
-                    item.editing = false;
+                    revertEdits(item);
                 });
         };
 

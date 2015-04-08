@@ -21,8 +21,8 @@
             <label for="toggle-all">Alle</label>
             <ul id="shopping-list">
                 <li ng-repeat="item in items | filter:statusFilter track by $index">
-                    <div class="view" ng-hide="item.editing">
-                        <label ng-class="{ done: item.bought}"
+                    <div class="view">
+                        <label ng-class="{done: item.bought}"
                                ng-click="toggleBought(item)">{{item.number}} x {{item.article.name}}</label>
                         <div class="pull-right">
                             <button class="invisible-button" ng-click="startEditing(item)">
@@ -33,17 +33,6 @@
                             </button>
                         </div>
                     </div>
-                    <form ng-submit="saveEdits(item, 'submit')" ng-show="item.editing">
-                        <div class="form-group">
-                            <div class="col-xs-4">
-                                <input class="form-control" type="number" ng-model="item.number" min="1" max="99"/>
-                            </div>
-                            <div class="col-xs-8">
-                                <input ng-trim="false" class="form-control" ng-model="item.article.name">
-                            </div>
-                        </div>
-                        <button type="submit" style="display:none" class="btn btn-success">Submit</button>
-                    </form>
                 </li>
             </ul>
         </section>
