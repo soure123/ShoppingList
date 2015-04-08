@@ -16,37 +16,48 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
             return true;
         };
 
+        $scope.toggleNavCollapsed = function (){
+            $scope.navCollapsed = ! $scope.navCollapsed;
+        }
+
+        var urlMatchesPath = function(url, path){
+            return url && url.$$route && url.$$route.originalPath == path;
+        };
+
         var redirectToLoginIfNotFreePage = function(newUrl, oldUrl) {
-            if (newUrl.$$route && newUrl.$$route.originalPath != '/login' && newUrl.$$route.originalPath != '/logout') {
-                if(oldUrl && oldUrl.$$route && oldUrl.$$route.originalPath != '/login' && oldUrl.$$route.originalPath != '/logout'){
+            if (!urlMatchesPath(newUrl, '/login') && !urlMatchesPath(newUrl, '/logout')) {
+                if(!urlMatchesPath(oldUrl, '/login') && !urlMatchesPath(oldUrl, '/logout')){
                     $scope.lastPath = oldUrl.$$route.originalPath;
                 }else if(!oldUrl){
                     $scope.lastPath = '/';
                 }
                 $location.path('/login');
             }
-        }
+        };
+
+        var redirectToLoginIfAuthenticationRequired = function(newUrl, oldUrl) {
+            authService.isAuthenticated(function (username) {
+                $rootScope.user = username;
+                if (!authenticated) {
+                    redirectToLoginIfNotFreePage(newUrl, oldUrl);
+                }
+
+            });
+        };
 
         $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
 
             if($rootScope.authenticated){
-                if(newUrl.$$route && newUrl.$$route.originalPath == '/login'){
-                    $location.path( oldUrl.$$route.originalPath == '/logout' ? '/' : oldUrl.$$route.originalPath);
+                if(urlMatchesPath(newUrl, '/login')){
+                    $location.path( urlMatchesPath(oldUrl, '/logout') ? '/' : oldUrl.$$route.originalPath);
                 }
             }else{
-                authService.isAuthenticated(function (username) {
-                    $rootScope.user = username;
-                    redirectToLoginIfNotFreePage(newUrl, oldUrl)
-                })
+                redirectToLoginIfAuthenticationRequired(newUrl, oldUrl);
             }
         })
 
         $scope.$on('$routeChangeSuccess', function () {
             $scope.navCollapsed = true;
         })
-
-        $scope.toggleNavCollapsed = function (){
-            $scope.navCollapsed = ! $scope.navCollapsed;
-        }
     }
 ]);
