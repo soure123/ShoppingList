@@ -31,15 +31,10 @@
     </div>
     <div class="navbar-right">
         <p class="navbar-text hidden-xs">{{user}}</p>
-        <ul ng-hide="!authenticated && isActive('/login')" collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
+        <ul collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
             <li ng-show="authenticated">
                 <a href="#/logout">
                     <span class="glyphicon glyphicon-log-out" aria-hidden="true"> Logout</span>
-                </a>
-            </li>
-            <li ng-show="!authenticated && !isActive('/login')">
-                <a href="#/login">
-                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"> Login</span>
                 </a>
             </li>
         </ul>

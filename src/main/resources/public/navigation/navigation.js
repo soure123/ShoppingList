@@ -52,7 +52,7 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
             });
         };
 
-        var stopCalling = $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
+        $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
             if($rootScope.authenticated){
                 if(urlMatchesPath(newUrl, '/login')){
                     $location.path( urlIsDefined(oldUrl) ? oldUrl.$$route.originalPath : '/');
@@ -60,7 +60,6 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
             }else{
                 if(!isFreeRoute(newUrl)){
                     event.preventDefault();
-                    stopCalling();
                 }
                 redirectToLoginIfAuthenticationRequired(newUrl);
             }
