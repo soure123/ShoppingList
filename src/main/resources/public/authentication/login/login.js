@@ -16,9 +16,12 @@ shopping.controller('login',['$rootScope', '$scope', '$location', 'authService',
         };
 
         var redirectIfLoggedIn = function (){
-            if($rootScope.authenticated){
-                $location.path($scope.$parent.lastPath);
-            }
+            authService.isAuthenticated(function (username) {
+                $rootScope.user = username;
+                if($rootScope.authenticated){
+                    $location.path($scope.$parent.lastPath);
+                }
+            })
         }
 
         redirectIfLoggedIn();

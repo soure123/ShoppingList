@@ -53,11 +53,7 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
         };
 
         $rootScope.$on('$routeChangeStart', function (event, newUrl, oldUrl) {
-            if($rootScope.authenticated){
-                if(urlMatchesPath(newUrl, '/login')){
-                    $location.path( urlIsDefined(oldUrl) ? oldUrl.$$route.originalPath : '/');
-                }
-            }else{
+            if(!$rootScope.authenticated){
                 if(!isFreeRoute(newUrl)){
                     event.preventDefault();
                 }
