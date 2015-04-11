@@ -1,4 +1,4 @@
-package de.klem.shopping.auth;
+package de.klem.shopping.security;
 
 import org.springframework.stereotype.Service;
 

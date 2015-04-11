@@ -1,10 +1,8 @@
-package de.klem.shopping.auth.user;
+package de.klem.shopping.security.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
@@ -33,13 +31,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "api/user", method = RequestMethod.POST)
-    public void createUser(@RequestBody UserResource user){
+    public void createUser(@RequestBody User user){
         JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager();
         userDetailsManager.setDataSource(datasource);
         PasswordEncoder encoder = new BCryptPasswordEncoder();
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
-        User userDetails = new User(user.getUsername(), encoder.encode(user.getPassword()), authorities);
+        org.springframework.security.core.userdetails.User userDetails = new org.springframework.security.core.userdetails.User(user.getUsername(), encoder.encode(user.getPassword()), authorities);
 
         userDetailsManager.createUser(userDetails);
     }

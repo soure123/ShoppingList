@@ -7,33 +7,21 @@ The Frontend is an AngularJS-App and the Backend is a Spring Boot Application.
 
 * Maven
 * Java 8
-* MySQL
 
 ### Setup
 
 * Clone the project from Github
 * Create a DB-Schema and a User with Read and Write Privileges
-* Create the Spring Security tables for users and authorities
+* Set the properties in src/main/resources/application.properties
 
-##Users
-
-  <pre>create table users(
-      username varchar_ignorecase(50) not null primary key,
-      password varchar_ignorecase(50) not null,
-      enabled boolean not null);</pre>
-
-##Authorities
-
-  <pre>create table authorities (
-      username varchar_ignorecase(50) not null,
-      authority varchar_ignorecase(50) not null,
-      constraint fk_authorities_users foreign key(username) references users(username));
-      create unique index ix_auth_username on authorities (username,authority);</pre>
-
-### Configuration
+## Properties
 
 The application.properties contains all required properties for this project. 
-You may change the `datasource-url`, `username` and `password`
+You may change:
+* spring.datasource.url
+* spring.datasource.username
+* spring.datasource.password
+
 
 ### Run the Application
 Simply navigate to the project directory and execute `mvn spring-boot:run` 
