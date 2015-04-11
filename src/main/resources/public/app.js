@@ -1,4 +1,4 @@
-var shopping = angular.module('shopping', ['ngRoute', 'ui.bootstrap']);
+var shopping = angular.module('shopping', ['ngRoute', 'ngResource', 'ui.bootstrap']);
 
 shopping.config(['$routeProvider', '$httpProvider',
     function ($routeProvider, $httpProvider) {
