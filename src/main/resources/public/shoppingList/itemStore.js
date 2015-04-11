@@ -71,10 +71,10 @@ shopping.factory('itemStore', ['$http', 'articleStore',
 
             insert: function (item) {
                 return articleStore.fetch().then(function(articles){
-                    var article = articleStore.findByName(item.article.name);
+                    var article = articleStore.findByValue("name", item.article.name);
                     if(!article){
-                        articleStore.post(item.article).then(function (location) {
-                            postItem(item, location);
+                        articleStore.post(item.article).then(function (article) {
+                            postItem(item, article._links.self.href);
                         });
                         return store.items
                     }else{
@@ -86,10 +86,10 @@ shopping.factory('itemStore', ['$http', 'articleStore',
             },
             put: function (item) {
                 return articleStore.fetch().then(function(articles) {
-                    var article = articleStore.findByName(item.article.name);
+                    var article = articleStore.findByValue("name", item.article.name);
                     if(!article){
-                        articleStore.post(item.article).then(function (location) {
-                            putItem(item, location);
+                        articleStore.post(item.article).then(function (article) {
+                            putItem(item, article._links.self.href);
                         });
                     }else{
                         putItem(item, article._links.self.href);
