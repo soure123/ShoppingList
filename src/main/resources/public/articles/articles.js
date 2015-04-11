@@ -14,7 +14,7 @@ shopping.controller('articles', ['$scope', 'articleStore',
         var articles = $scope.articles = articleStore.articles;
 
         $scope.removeArticle = function (article) {
-            articleStore.delete(article);
+            articleStore.remove(article, true);
         };
     }
 ]);

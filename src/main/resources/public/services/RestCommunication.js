@@ -3,19 +3,6 @@ var shopping = angular.module('shopping');
 shopping.factory('itemStore', ['$filter', '$resource', '$q', '$http', 'articleStore', 'HALResource',
     function ($filter, $resource, $q, $http, articleStore, HALResource) {
         'use strict';
-        var ITEM_ENDPOINT = '/api/shoppingItems/';
-
-        var methods = {
-            'update': { method:'PUT' },
-            'delete': { method: 'DELETE'}
-        };
-
-
-        var Item = $resource(ITEM_ENDPOINT + "/:id", null, methods);
-
-        var ItemArtikel = $resource(ITEM_ENDPOINT + "/:id/article", null, methods);
-
-        var removedItems = [];
 
         var deleteItem = function (item) {
             if(item.id) {
@@ -65,36 +52,14 @@ shopping.factory('itemStore', ['$filter', '$resource', '$q', '$http', 'articleSt
 
         var store = {
             items: [],
-            synch: function () {
-                deleteRemovedItems().then(function (){
-                    Item.get().$promise
-                        .then(function(response){
-                            var newItems = HALResource.getList(response);
-                            for(var i = 0; i < store.items.length; i++){
-                                if(store.items[i].id){
-                                    var newItem = $filter('findByValue')(newItems, "id", store.items[i].id)
-                                    //remove if doesn't exist anymore
-                                    if(!newItem){
-                                        store.remove(article);
-                                    }
-                                    //update if modified
-                                    else if (store.items[i] != newItem){
-                                        put(store.items[i]);
-                                    }
-                                }else{
-                                    //create new
-                                    post(store.items[i])
-                                }
-                            }
-                            for(var i = 0; i < newItems.length; i++){
-                                var oldItem = $filter('findByValue')(store.items, "id", newItems[i].id)
-                                if(!oldItem){
-                                    //add new
-                                    store.add(newItems[i]);
-                                }
-                            }
-                        });
-                });
+            fetch : function(resource, list){
+                list.splice(0,lists.length);
+                return resource.get().$promise
+                    .then(function(response){
+                        list = HALResource.getList(response);
+                    });
+            },
+           
             },
             add: function (item, persist) {
                 if(item.embeddedArticle){
@@ -106,7 +71,7 @@ shopping.factory('itemStore', ['$filter', '$resource', '$q', '$http', 'articleSt
                             if (persist) {
                                 return post(item).$promise;
                             }
-                       })
+                        })
                 }else{
                     item.embeddedArticle = ItemArtikel.get({id:item.id});
                     item.embeddedArticle.$promise.then(function(){

@@ -5,6 +5,8 @@ import de.klem.shopping.list.item.ShoppingItem;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
+import org.springframework.http.MediaType;
 
 import java.net.URI;
 

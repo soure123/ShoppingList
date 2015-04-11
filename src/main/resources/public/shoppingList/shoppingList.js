@@ -59,21 +59,23 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         });
 
         $scope.addItem = function additem(){
+
+            $scope.saving = true;
+
             var newItem = {
-                article : {
+                embeddedArticle : {
                     name: $scope.newItem.name.trim()
                 },
                 number: $scope.newItem.count,
                 bought : false
             }
 
-            if(!newItem.article.name){
+            if(!newItem.embeddedArticle.name){
+                $scope.saving = false;
                 return;
             }
 
-            $scope.saving = true;
-
-            itemStore.insert(newItem)
+            itemStore.add(newItem, true)
                 .then(function(){
                     $scope.newItem = initNewItem();
                 })
@@ -83,7 +85,7 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         }
 
         $scope.removeItem = function (item) {
-            itemStore.delete(item);
+            itemStore.remove(item, true);
         };
 
         $scope.startEditing = function(item){
@@ -93,18 +95,19 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         }
 
         var revertEdits = function(item){
-            item.article.name = $scope.originalItem.article.name;
+            item.embeddedArticle.name = $scope.originalItem.embeddedArticle.name;
             item.number = $scope.originalItem.number;
         }
 
         var saveEdits = function (item) {
 
-            if (item.article.name === $scope.originalItem.article.name && item.number === $scope.originalItem.number) {
+            if (item.embeddedArticle.name === $scope.originalItem.embeddedArticle.name
+                && item.number === $scope.originalItem.number) {
                 item.editing = false;
                 return;
             }
 
-            itemStore[item.article.name ? 'put' : 'delete'](item)
+            itemStore[item.embeddedArticle.name ? 'update' : 'remove'](item, true)
                 .then(function success() {}, function error() {
                     revertEdits(item);
                 });
