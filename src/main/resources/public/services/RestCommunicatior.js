@@ -34,10 +34,13 @@ shopping.factory('RestCommunicator', ['HALResource', '$q',
                     });
             },
             fetchElement : function(resource, element){
-                return resource.get({id: element.id}).$promise
-                    .then(function(value){
-                        return {element: element, fetchedElement : value};
-                    })
+                if(element.id) {
+                    return resource.get({id: element.id}).$promise
+                        .then(function (value) {
+                            return {element: element, fetchedElement: value};
+                        })
+                }
+                return defaultResolvedPromise;
             },
             add: function (resource, element, list) {
                 return post(resource, element).$promise.then(function(value){
