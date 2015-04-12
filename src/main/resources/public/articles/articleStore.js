@@ -1,6 +1,6 @@
 var shopping = angular.module('shopping');
-shopping.factory('articleStore', ['HALResource', 'RestCommunicator', '$resource' , '$q', '$filter',
-    function(HALResource, RestCommunicator, $resource, $q, $filter){
+shopping.factory('articleStore', ['RestCommunicator', '$resource', '$filter', '$q',
+    function(RestCommunicator, $resource, $filter, $q){
         var ARTICLE_ENDPOINT = "/api/articles/";
 
         var methods = {

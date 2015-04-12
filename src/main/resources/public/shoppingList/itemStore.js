@@ -1,7 +1,7 @@
 var shopping = angular.module('shopping');
 
-shopping.factory('itemStore', ['RestCommunicator', '$filter', '$resource', '$q', '$http', 'articleStore', 'HALResource',
-    function (RestCommunicator, $filter, $resource, $q, $http, articleStore, HALResource) {
+shopping.factory('itemStore', ['RestCommunicator', '$filter', '$resource', 'articleStore',
+    function (RestCommunicator, $filter, $resource, articleStore) {
         'use strict';
         var ITEM_ENDPOINT = '/api/shoppingItems/';
 
