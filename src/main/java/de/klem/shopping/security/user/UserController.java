@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "api/user", method = RequestMethod.POST)
-    public void createUser(@RequestBody User user){
+    public void createUser(@RequestBody UserResource user){
         JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager();
         userDetailsManager.setDataSource(datasource);
         PasswordEncoder encoder = new BCryptPasswordEncoder();
