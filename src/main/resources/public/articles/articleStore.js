@@ -13,7 +13,7 @@ shopping.factory('articleStore', ['RestCommunicator', '$resource', '$filter', '$
         var store = {
             articles : [],
             add: function(article) {
-                articleInStore = store.findByValue("name", article.name);
+                articleInStore = store.findByValue("name", article.name)[0];
                 if(!articleInStore.length){
                     return RestCommunicator.add(Article, article, store.articles);
                 }
