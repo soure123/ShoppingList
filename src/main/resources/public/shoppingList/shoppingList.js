@@ -77,12 +77,11 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
 
             itemStore.add(newItem, true)
                 .then(function(){
-
+                    $scope.newItem = initNewItem();
                 })
                 .finally(function(){
                     $scope.saving = false;
                 })
-            $scope.newItem = initNewItem();
         }
 
         $scope.removeItem = function (item) {
