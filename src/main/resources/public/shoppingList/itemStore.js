@@ -42,7 +42,9 @@ shopping.factory('itemStore', ['RestCommunicator', '$filter', '$resource', 'arti
                     });
             },
             update:function(item){
-                return articleStore.update(item.embeddedArticle).then(function(){
+                return articleStore.update(item.embeddedArticle).then(function(article){
+                    item.embeddedArticle = article;
+                    item.article = article._links.self.href;
                     return RestCommunicator.update(Item, item);
                 });
             },
