@@ -5,7 +5,7 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
         $scope.lastPath = "";
         $scope.navCollapsed = true;
 
-        $scope.isActive = function (viewLocation) {
+        $scope.isSubRouteOf = function (viewLocation) {
             viewLocation = viewLocation.split('/');
             var location = $location.path().split('/');
             for(var i = 0; i < viewLocation.length; i++){
@@ -14,6 +14,10 @@ shopping.controller('navigation', ['$rootScope', '$scope', '$location', 'authSer
                 }
             }
             return true;
+        };
+
+        $scope.isActive = function (viewLocation) {
+            return viewLocation == $location.path();
         };
 
         $scope.toggleNavCollapsed = function (){

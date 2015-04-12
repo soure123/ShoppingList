@@ -28,12 +28,23 @@
     display:inline;
 }
 
+.pagination{
+    color: #555 !important;
+}
+
+.pagination .active {
+    background-color: #e7e7e7 !important;
+    border-color: #D3D3D3 !important;
+}
+
 .done {
     text-decoration: line-through;
 }
 
 #shopping-list{
     list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 [ng-click],
@@ -44,4 +55,26 @@
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
+}
+
+.framed{
+    border-width: 1px;
+    border-style: solid;
+    border-color: #D3D3D3;
+}
+
+.light-green{
+    background: #a4df07;
+    border-color: #92cd07;
+}
+
+.shadowed {
+    -moz-box-shadow: 10px 10px 7px #ccc;
+    -webkit-box-shadow: 10px 10px 7px #ccc;
+    box-shadow: 10px 10px 7px #ccc;
+}
+
+.box{
+    padding: 20px;
+    margin-bottom: 10px;
 }
