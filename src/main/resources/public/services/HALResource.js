@@ -2,13 +2,13 @@ var shopping = angular.module('shopping');
 shopping.factory('HALResource', [
     function(){
         var HALResource = {
-            getList : function(resource){
+            getContent : function(resource){
                 if(resource._embedded){
                     for(var key in resource._embedded){
                         return resource._embedded[key];
                     }
                 }
-                return [];
+                return resource;
             },
             getRelations : function(resource){
                 var relations = [];
