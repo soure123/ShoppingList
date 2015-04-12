@@ -119,7 +119,7 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
             }else{
                 item.bought = !item.bought;
             }
-            itemStore.put(item)
+            itemStore.update(item)
                 .then(function success() {}, function error() {
                     item.bought = !item.bought;
                 });
