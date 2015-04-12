@@ -13,12 +13,12 @@ shopping.factory('articleStore', ['RestCommunicator', '$resource', '$filter', '$
         var store = {
             articles : [],
             add: function(article) {
-                articleInStore = store.findByValue("name", article.name)[0];
+                articleInStore = store.findByValue("name", article.name);
                 if(!articleInStore.length){
                     return RestCommunicator.add(Article, article, store.articles);
                 }
                 var deferred = $q.defer();
-                deferred.resolve(articleInStore);
+                deferred.resolve(articleInStore[0]);
                 return deferred.promise;
             },
             remove : function(article){
