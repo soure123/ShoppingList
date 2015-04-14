@@ -14,7 +14,7 @@
             </a>
         </div>
     </div>
-    <div ng-show="authenticated">
+    <div ng-show="authenticated" ng-cloak>
         <ul collapse="navCollapsed" class="nav navbar-nav navbar-left navbar-collapse">
             <li ng-class="{ active: isSubRouteOf('/einkaufsliste')}">
                 <a href="#/einkaufsliste">
@@ -29,7 +29,7 @@
             </li>
         </ul>
     </div>
-    <div class="navbar-right">
+    <div class="navbar-right" ng-cloak>
         <p class="navbar-text hidden-xs">{{user}}</p>
         <ul collapse="navCollapsed" class="nav navbar-nav navbar-collapse">
             <li ng-show="authenticated">

@@ -39,9 +39,9 @@
             </ul>
         </section>
         <footer id="footer" class="framed shadowed box" ng-show="items.length" ng-cloak>
-            <span id="item-count"><strong>{{remainingCount}}</strong>
-                <ng-pluralize count="remainingCount"
-                              when="{ one:'Eintrag übrig', other:'Einträge übrig' }"></ng-pluralize>
+            <span id="item-count"><strong>{{remaining}}</strong>
+                <ng-pluralize count="remaining"
+                              when="{ one:'Eintrag verbleibend', other:'Einträge verbleibend' }"></ng-pluralize>
             </span>
             <input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
             <label for="toggle-all">Alle</label>

@@ -16,6 +16,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
     <link rel="apple-touch-icon" sizes="180x180" href="img/fav.ico">
 
+    <title>Einkaufsliste</title>
+</head>
+<body ng-controller="navigation">
+    <div class="navbar navbar-default navbar-fixed-top" ng-include="'navigation/navigation.html'"></div>
+
+    <div class="content col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" ng-view></div>
+
     <!--Libraries-->
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="lib/angular-route.min.js"></script>
@@ -38,12 +45,5 @@
     <script type="text/javascript" src="articles/articles.js"></script>
     <script type="text/javascript" src="accounting/accounting.js"></script>
     <script type="text/javascript" src="shoppingList/edit/editItem.js"></script>
-
-    <title>Einkaufsliste</title>
-</head>
-<body ng-controller="navigation">
-<div class="navbar navbar-default navbar-fixed-top" ng-include="'navigation/navigation.html'">
-</div>
-<div class="content col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8" ng-view></div>
 </body>
 </html>

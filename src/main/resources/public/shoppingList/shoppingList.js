@@ -20,6 +20,9 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
                 count : 1
             };
         }
+
+        $scope.allChecked= false;
+        $scope.remaining = 0;
         $scope.originalItem = null;
         $scope.newItem = initNewItem();
 
@@ -47,7 +50,8 @@ shopping.controller('shoppingList', ['$scope', 'itemStore', '$routeParams', '$fi
         };
 
         $scope.$watch('items', function () {
-            $scope.allChecked = !$filter('filter')(items, { bought: false }).length;
+            $scope.remaining = $filter('filter')(items, { bought: false }).length;
+            $scope.allChecked = !$scope.remaining;
         }, true);
 
         $scope.$on('$routeChangeSuccess', function () {
