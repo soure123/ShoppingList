@@ -19,7 +19,7 @@
     text-align : left;
 }
 
-.invisible-button{
+.invisible {
     background:transparent;
     border:none;
 }
@@ -49,6 +49,10 @@
 
 ul {
     margin-bottom: 0px;
+}
+
+.item-view {
+    overflow:auto;
 }
 
 [ng-click],
