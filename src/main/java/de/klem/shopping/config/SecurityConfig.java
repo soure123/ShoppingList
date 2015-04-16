@@ -4,6 +4,7 @@ import de.klem.shopping.security.PasswordGenerator;
 import javafx.application.Application;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -44,6 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     private PasswordGenerator passwordGenerator;
 
+    @Value("${security.user.password:#{null}}")
+    private String password;
+
     private Logger logger = Logger.getLogger(Application.class.getName());
 
     @Override
@@ -82,7 +86,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private void createDefaultAdmin(JdbcUserDetailsManager userDetailsManager, PasswordEncoder encoder) {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ADMIN"));
-        String password = passwordGenerator.generatePassword();
+        String password = "";
+        if(this.password != null){
+            password = this.password;
+        }else{
+            password = passwordGenerator.generatePassword();
+        }
         logger.info("\n\nCreated initial admin password: \"" + password + "\"\n");
         User userDetails = new User("admin", encoder.encode(password), authorities);
 
