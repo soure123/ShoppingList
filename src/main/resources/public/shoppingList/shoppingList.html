@@ -1,6 +1,6 @@
 <div class="centered-text col-sm-offset-3 col-sm-6">
     <section id="shoppingList">
-        <header class="framed shadowed box" id="header">
+        <header class="framed shadowed-high box" id="header">
             <h1> Einkaufsliste </h1>
 
             <form class="form-horizontal" role="form" ng-submit="addItem()">
@@ -36,7 +36,7 @@
                 </li>
             </ul>
         </section>
-        <footer id="footer" class="framed shadowed box" ng-show="items.length" ng-cloak>
+        <footer id="footer" class="framed shadowed-high box" ng-show="items.length" ng-cloak>
             <span id="item-count"><strong>{{remaining}}</strong>
                 <ng-pluralize count="remaining"
                               when="{ one:'Eintrag verbleibend', other:'Einträge verbleibend' }"></ng-pluralize>
