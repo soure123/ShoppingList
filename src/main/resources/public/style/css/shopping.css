@@ -43,25 +43,9 @@
     margin-left: 4px;
 }
 
-#shopping-list li:active{
-    margin-right: 7px;
-    margin-left: 7px;
-    -moz-box-shadow: 2px 1px 10px #ccc;
-    -webkit-box-shadow: 2px 1px 10px #ccc;
-    box-shadow: 2px 1px 10px #ccc;
-}
-
 #shopping-list li.to-buy{
     margin-left: 0;
     margin-right: 0;
-}
-
-#shopping-list li.to-buy:active{
-    margin-right: 7px;
-    margin-left: 7px;
-    -moz-box-shadow: 2px 1px 10px #ccc;
-    -webkit-box-shadow: 2px 1px 10px #ccc;
-    box-shadow: 2px 1px 10px #ccc;
 }
 
 ul {
